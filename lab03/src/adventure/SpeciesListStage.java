@@ -13,11 +13,11 @@ public class SpeciesListStage implements AdventureStage {
     private static final List<String> REFERENCE_1 = List.of(
             "leopards",     // Reactive Systems in Java
             "bison"         // Java EXTREME Programming Cookbook
-    );
+    );//leopards,bison
     private static final List<String> REFERENCE_2 = List.of(
             "squirrels",    // Java: The Good Parts
             "hummingbirds"  // Better, Faster, Lighter Java
-    );
+    );//squirrels,hummingbirds
     private static final List<String> REFERENCE_3 = new ArrayList<>();
 
     private final In in;
@@ -92,7 +92,7 @@ public class SpeciesListStage implements AdventureStage {
      *
      * Similarity is defined as when listTwo contains all the elements in listOne.
      */
-    public static int arraySimilarity(List<String> listOne, List<String> listTwo) {
+    public static double arraySimilarity(List<String> listOne, List<String> listTwo) {
         List<String> copy = new ArrayList<>(listOne);
         int similarObjects = 0;
         for (String o : listTwo) {
@@ -101,6 +101,6 @@ public class SpeciesListStage implements AdventureStage {
                 copy.remove(o);
             }
         }
-        return similarObjects / listOne.size();
+        return (double) similarObjects / listOne.size();
     }
 }
