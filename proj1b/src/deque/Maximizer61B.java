@@ -10,7 +10,13 @@ public class Maximizer61B {
      * @return          the maximum element
      */
     public static <T extends Comparable<T>> T max(Iterable<T> iterable) {
-        return null;
+        T a=null;
+        for(T i:iterable){
+            if(a==null||a.compareTo(i)<0){
+                a=i;
+            }
+        }
+        return a;
     }
 
     /**
@@ -22,7 +28,13 @@ public class Maximizer61B {
      * @return          the maximum element according to the comparator
      */
     public static <T> T max(Iterable<T> iterable, Comparator<T> comp) {
-        return null;
+        T a=null;
+        for(T i:iterable){
+            if(a==null||comp.compare(a,i)<0) {
+                a = i;
+            }
+        }
+        return a;
     }
 
     public static void main(String[] args) {
