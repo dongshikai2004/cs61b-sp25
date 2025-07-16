@@ -1,5 +1,9 @@
 package ngrams;
 
+import edu.princeton.cs.algs4.In;
+import org.checkerframework.checker.units.qual.A;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -31,6 +35,11 @@ public class TimeSeries extends TreeMap<Integer, Double> {
     public TimeSeries(TimeSeries ts, int startYear, int endYear) {
         super();
         // TODO: Fill in this constructor.
+        for(Integer i:ts.keySet()){
+            if(i.compareTo(startYear)>=0&&i.compareTo(endYear)<=0){
+                this.put(i,ts.get(i));
+            }
+        }
     }
 
     /**
@@ -38,7 +47,7 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public List<Integer> years() {
         // TODO: Fill in this method.
-        return null;
+        return new ArrayList<>(this.keySet());
     }
 
     /**
@@ -47,7 +56,7 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public List<Double> data() {
         // TODO: Fill in this method.
-        return null;
+        return new ArrayList<>(this.values());
     }
 
     /**
@@ -61,7 +70,20 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public TimeSeries plus(TimeSeries ts) {
         // TODO: Fill in this method.
-        return null;
+        TimeSeries newt=new TimeSeries();
+        for(Integer i:this.keySet()){
+            if(ts.containsKey(i)){
+                newt.put(i,this.get(i)+ts.get(i));
+            }else{
+                newt.put(i,this.get(i));
+            }
+        }
+        for(Integer i:ts.keySet()){
+            if(!this.containsKey(i)){
+                newt.put(i,ts.get(i));
+            }
+        }
+        return newt;
     }
 
     /**
@@ -75,7 +97,15 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public TimeSeries dividedBy(TimeSeries ts) {
         // TODO: Fill in this method.
-        return null;
+        TimeSeries newt=new TimeSeries();
+        for(Integer i:this.keySet()){
+            if(ts.containsKey(i)){
+                newt.put(i,this.get(i)/ts.get(i));
+            }else{
+                throw new IllegalArgumentException();
+            }
+        }
+        return newt;
     }
 
     // TODO: Add any private helper methods.
