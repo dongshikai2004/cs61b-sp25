@@ -31,13 +31,46 @@ public class TestRedBlackTree {
         RedBlackTree.RBTreeNode<Integer> node1 = new RedBlackTree.RBTreeNode<>(true, 10, null, null);
         RedBlackTree.RBTreeNode<Integer> node2 = new RedBlackTree.RBTreeNode<>(false, 9, null, null);
         RedBlackTree.RBTreeNode<Integer> node3 = new RedBlackTree.RBTreeNode<>(false, 8, null, null);
+        RedBlackTree.RBTreeNode<Integer> node4 = new RedBlackTree.RBTreeNode<>(true, 7, null, null);
+        RedBlackTree.RBTreeNode<Integer> node5 = new RedBlackTree.RBTreeNode<>(true, 6, null, null);
         node1.left = node2;
         node2.left = node3;
+        node1.right = node4;
+        node2.right = node5;
 
         RedBlackTree.RBTreeNode<Integer> newRoot = rbtree.rotateRight(node1);
         assertThat(newRoot.item).isEqualTo(9);
         assertThat(newRoot.right.item).isEqualTo(10);
         assertThat(newRoot.left.item).isEqualTo(8);
+        assertThat(newRoot.right.right.item).isEqualTo(7);
+        assertThat(newRoot.right.left.item).isEqualTo(6);
+        assertThat(newRoot.isBlack).isEqualTo(true);
+        assertThat(newRoot.right.isBlack).isEqualTo(false);
+        assertThat(newRoot.left.isBlack).isEqualTo(false);
+    }
+
+    @Test
+    public void testBasicRotateLeft() {
+        // Insert 10, 9, 8
+        RedBlackTree<Integer> rbtree = new TestableRedBlackTree();
+        assertThat(rbtree.root).isNull();
+
+        RedBlackTree.RBTreeNode<Integer> node1 = new RedBlackTree.RBTreeNode<>(true, 10, null, null);
+        RedBlackTree.RBTreeNode<Integer> node2 = new RedBlackTree.RBTreeNode<>(false, 9, null, null);
+        RedBlackTree.RBTreeNode<Integer> node3 = new RedBlackTree.RBTreeNode<>(false, 8, null, null);
+        RedBlackTree.RBTreeNode<Integer> node4 = new RedBlackTree.RBTreeNode<>(true, 7, null, null);
+        RedBlackTree.RBTreeNode<Integer> node5 = new RedBlackTree.RBTreeNode<>(true, 6, null, null);
+        node2.left=node3;
+        node2.right=node1;
+        node1.left=node5;
+        node1.right=node4;
+
+        RedBlackTree.RBTreeNode<Integer> newRoot = rbtree.rotateLeft(node2);
+        assertThat(newRoot.item).isEqualTo(10);
+        assertThat(newRoot.right.item).isEqualTo(7);
+        assertThat(newRoot.left.item).isEqualTo(9);
+        assertThat(newRoot.left.left.item).isEqualTo(8);
+        assertThat(newRoot.left.right.item).isEqualTo(6);
     }
 
     @Test
